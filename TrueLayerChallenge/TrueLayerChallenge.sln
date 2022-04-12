@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerChallenge.WebApi", "TrueLayerChallenge.WebApi\TrueLayerChallenge.WebApi.csproj", "{756615D4-0DDC-4A17-BC08-55445212A81E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{756615D4-0DDC-4A17-BC08-55445212A81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756615D4-0DDC-4A17-BC08-55445212A81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756615D4-0DDC-4A17-BC08-55445212A81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756615D4-0DDC-4A17-BC08-55445212A81E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF7761E0-EA31-47C7-B7FC-71B126EDA0B6}
+	EndGlobalSection
+EndGlobal
