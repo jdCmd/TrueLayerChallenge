@@ -8,6 +8,7 @@ namespace TrueLayerChallenge.WebApi.Controllers;
 /// </summary>
 /// <typeparam name="TController"> is the type of the inheriting <see cref="ApiController{T}"/>.</typeparam>
 [ApiController]
+[Route("[controller]")]
 public abstract class ApiController<TController> : ControllerBase where TController : ApiController<TController>
 {
     private readonly ILogger<TController> _logger;
