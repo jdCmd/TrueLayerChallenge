@@ -1,7 +1,6 @@
-using Microsoft.Extensions.Options;
-using TrueLayerChallenge.WebApi.Configuration;
 using TrueLayerChallenge.WebApi.Dtos;
 using TrueLayerChallenge.WebApi.Extensions;
+using TrueLayerChallenge.WebApi.Resources;
 using TrueLayerChallenge.WebApi.Schemas.PokeApi;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
@@ -20,26 +19,20 @@ internal class PokemonService : IPokemonService
     /// Creates a new <see cref="PokemonService"/>.
     /// </summary>
     /// <param name="logger"><see cref="ILogger"/> providing logger functionality within the <see cref="PokemonService"/>.</param>
-    /// <param name="config"><see cref="IOptions{TOptions}"/> containing <see cref="PokeApiConfig"/>.</param>
+    /// <param name="httpClient"><see cref="HttpClient"/> instance providing HTTP functionality.</param>
     /// <param name="funTranslationsService"><see cref="IFunTranslationsService"/> for performing fun translations operations.</param>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="logger"/> is null.
     /// -or-
+    /// <paramref name="httpClient"/> is null.
+    /// -or-
     /// <paramref name="funTranslationsService"/> is null.
     /// </exception>
-    public PokemonService(ILogger<PokemonService> logger, IOptions<PokeApiConfig> config, IFunTranslationsService funTranslationsService)
+    public PokemonService(ILogger<PokemonService> logger, HttpClient httpClient, IFunTranslationsService funTranslationsService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        if (config == null) throw new ArgumentNullException(nameof(config));
-        if (config.Value == null) throw new ArgumentNullException(nameof(config.Value));
-
+        _client = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         _funTranslationsService = funTranslationsService ?? throw new ArgumentNullException(nameof(funTranslationsService));
-
-        _client = new HttpClient
-        {
-            BaseAddress = new Uri(config.Value.Url),
-            Timeout = new TimeSpan(0, 0, 0, config.Value.ConnectionTimeoutMilliseconds)
-        };
     }
 
     /// <inheritdoc />
@@ -67,20 +60,33 @@ internal class PokemonService : IPokemonService
 
     private async Task<string?> GetPokemonDescriptionAsync(string pokemonName)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, $"{Endpoint_PokemonSpecies}{pokemonName}");
-        using var response = await _client.SendAsync(request);
 
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            // could do something more elaborate here but just for illustration will log failure and return null
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"{Endpoint_PokemonSpecies}{pokemonName}");
+            using var response = await _client.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // future improvement could do something more elaborate here but just for illustration will log failure and return null
+                _logger.Log(LogLevel.Error, LogMessages.PokeApi_ErrorResponse, response.StatusCode);
+                return null;
+            }
+
+            var speciesInfo = await response.DeseriliseJsonContentAsync<PokemonSpecies>();
+
+            // future improvement update could be to allow user to choose different versions for test just use first for illustration
+
+            return speciesInfo.flavor_text_entries[0].flavor_text;
+        }
+        catch (HttpRequestException)
+        {
+            // future improvement implement Polly for retry pipeline here
+            _logger.Log(LogLevel.Error, LogMessages.PokeApi_HttpRequestFailed);
             return null;
         }
 
-        var speciesInfo = await response.DeseriliseJsonContentAsync<PokemonSpecies>();
 
-        // future improvement update could be to allow user to choose different versions for test just use first for illustration
-
-        return speciesInfo.flavor_text_entries[0].flavor_text;
     }
 
     private async Task<string?> ConvertToShakespeareanAsync(string content)

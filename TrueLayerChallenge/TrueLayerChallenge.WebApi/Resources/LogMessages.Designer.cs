@@ -95,5 +95,41 @@ namespace TrueLayerChallenge.WebApi.Resources {
                 return ResourceManager.GetString("Api_Succeeded", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fun Translator request returned non-success status code: {0}..
+        /// </summary>
+        internal static string FunTranslation_ErrorResponse {
+            get {
+                return ResourceManager.GetString("FunTranslation_ErrorResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fun Translator request failed due to HTTP related error..
+        /// </summary>
+        internal static string FunTranslation_HttpRequestFailed {
+            get {
+                return ResourceManager.GetString("FunTranslation_HttpRequestFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PokeApi request returned non-success status code: {0}..
+        /// </summary>
+        internal static string PokeApi_ErrorResponse {
+            get {
+                return ResourceManager.GetString("PokeApi_ErrorResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PokeApi request failed due to HTTP related error..
+        /// </summary>
+        internal static string PokeApi_HttpRequestFailed {
+            get {
+                return ResourceManager.GetString("PokeApi_HttpRequestFailed", resourceCulture);
+            }
+        }
     }
 }

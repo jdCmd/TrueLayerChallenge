@@ -129,4 +129,16 @@
   <data name="Api_Succeeded" xml:space="preserve">
     <value>'{0}' succeeded.</value>
   </data>
+  <data name="FunTranslation_ErrorResponse" xml:space="preserve">
+    <value>Fun Translator request returned non-success status code: {0}.</value>
+  </data>
+  <data name="FunTranslation_HttpRequestFailed" xml:space="preserve">
+    <value>Fun Translator request failed due to HTTP related error.</value>
+  </data>
+  <data name="PokeApi_ErrorResponse" xml:space="preserve">
+    <value>PokeApi request returned non-success status code: {0}.</value>
+  </data>
+  <data name="PokeApi_HttpRequestFailed" xml:space="preserve">
+    <value>PokeApi request failed due to HTTP related error.</value>
+  </data>
 </root>

@@ -35,9 +35,9 @@ public abstract class ApiController<TController> : ControllerBase where TControl
         try
         {
             _logger.Log(LogLevel.Information, LogMessages.Api_Called, executingControllerActionName);
-            var result = func();
+            var result = await func();
             _logger.Log(LogLevel.Information, LogMessages.Api_Succeeded, executingControllerActionName);
-            return await result;
+            return result;
         }
         // todo add further exception handling as required
         catch (ArgumentException e)

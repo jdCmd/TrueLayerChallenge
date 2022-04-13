@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Options;
 using TrueLayerChallenge.WebApi.Configuration;
+using TrueLayerChallenge.WebApi.Extensions;
 using TrueLayerChallenge.WebApi.Services;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
@@ -11,6 +13,20 @@ builder.Services.Configure<FunTranslationsConfig>(builder.Configuration.GetSecti
 // Add services to the container.
 builder.Services.AddSingleton<IPokemonService, PokemonService>();
 builder.Services.AddSingleton<IFunTranslationsService, FunTranslationsService>();
+
+// Add HttpClient instances
+builder.Services.AddHttpClient<IPokemonService, PokemonService>((sp, client) =>
+{
+    var config = sp.GetRequiredService<IOptions<PokeApiConfig>>().Value;
+    client.BaseAddress = new Uri(config.Url);
+    client.Timeout = new TimeSpan(0, 0, 0, config.ConnectionTimeoutMilliseconds);
+});
+builder.Services.AddHttpClient<IFunTranslationsService, FunTranslationsService>((sp, client) =>
+{
+    var config = sp.GetRequiredService<IOptions<FunTranslationsConfig>>().Value;
+    client.BaseAddress = new Uri(config.Url);
+    client.Timeout = new TimeSpan(0, 0, 0, config.ConnectionTimeoutMilliseconds);
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,6 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.AddExceptionHandling(app.Logger);
 
 app.UseHttpsRedirection();
 
