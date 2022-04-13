@@ -1,7 +1,12 @@
+using TrueLayerChallenge.WebApi.Configuration;
 using TrueLayerChallenge.WebApi.Services;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add configuration options to the container
+builder.Services.AddOptions<PokeApiConfig>(builder.Configuration[ConfigConstants.ConfigSection_PokeApi]);
+builder.Services.AddOptions<ShakespeareanTranslatorConfig>(builder.Configuration[ConfigConstants.ConfigSection_PokeApi]);
 
 // Add services to the container.
 builder.Services.AddSingleton<IPokemonService, PokemonService>();

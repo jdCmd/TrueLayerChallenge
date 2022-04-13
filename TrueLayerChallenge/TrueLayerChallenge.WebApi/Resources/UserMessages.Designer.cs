@@ -61,6 +61,15 @@ namespace TrueLayerChallenge.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PokeApi ConnectionTimeoutMilliseconds must be at least {0}ms..
+        /// </summary>
+        internal static string PokeApiConfig_ConnectionTimeoutMilliseconds_Invalid {
+            get {
+                return ResourceManager.GetString("PokeApiConfig_ConnectionTimeoutMilliseconds_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pokemon name must be provided..
         /// </summary>
         internal static string Pokemon_Get_NameNotProvided {
@@ -75,6 +84,15 @@ namespace TrueLayerChallenge.WebApi.Resources {
         internal static string Pokemon_Get_NotFound {
             get {
                 return ResourceManager.GetString("Pokemon_Get_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shakespearean translator ConnectionTimeoutMilliseconds must be at least {0}ms..
+        /// </summary>
+        internal static string ShakespeareanTranslatorConfig_ConnectionTimeoutMilliseconds_Invalid {
+            get {
+                return ResourceManager.GetString("ShakespeareanTranslatorConfig_ConnectionTimeoutMilliseconds_Invalid", resourceCulture);
             }
         }
     }

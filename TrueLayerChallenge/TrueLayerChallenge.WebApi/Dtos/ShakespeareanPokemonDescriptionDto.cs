@@ -8,11 +8,11 @@
         /// <summary>
         /// Name of the pokemon for which the <see cref="ShakespeareanPokemonDescriptionDto"/> corresponds to.
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// The Shakespearean description of the pokemon.
         /// </summary>
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!;
     }
 }

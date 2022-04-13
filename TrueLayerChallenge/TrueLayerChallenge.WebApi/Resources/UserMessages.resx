@@ -123,4 +123,10 @@
   <data name="Pokemon_Get_NotFound" xml:space="preserve">
     <value>Could not determine description for pokemon with given pokemon name.</value>
   </data>
+  <data name="PokeApiConfig_ConnectionTimeoutMilliseconds_Invalid" xml:space="preserve">
+    <value>PokeApi ConnectionTimeoutMilliseconds must be at least {0}ms.</value>
+  </data>
+  <data name="ShakespeareanTranslatorConfig_ConnectionTimeoutMilliseconds_Invalid" xml:space="preserve">
+    <value>Shakespearean translator ConnectionTimeoutMilliseconds must be at least {0}ms.</value>
+  </data>
 </root>
