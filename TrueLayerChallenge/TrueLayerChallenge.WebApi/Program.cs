@@ -5,8 +5,8 @@ using TrueLayerChallenge.WebApi.Services.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configuration options to the container
-builder.Services.AddOptions<PokeApiConfig>(builder.Configuration[ConfigConstants.ConfigSection_PokeApi]);
-builder.Services.AddOptions<FunTranslationsConfig>(builder.Configuration[ConfigConstants.ConfigSection_PokeApi]);
+builder.Services.Configure<PokeApiConfig>(builder.Configuration.GetSection($"{ConfigConstants.ConfigSection_ExternalServices}:{ConfigConstants.ConfigSection_PokeApi}"));
+builder.Services.Configure<FunTranslationsConfig>(builder.Configuration.GetSection($"{ConfigConstants.ConfigSection_ExternalServices}:{ConfigConstants.ConfigSection_FunTranslations}"));
 
 // Add services to the container.
 builder.Services.AddSingleton<IPokemonService, PokemonService>();

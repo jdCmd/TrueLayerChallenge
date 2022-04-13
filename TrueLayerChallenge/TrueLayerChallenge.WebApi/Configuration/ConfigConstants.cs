@@ -13,14 +13,19 @@ internal class ConfigConstants
     #region Config sections
 
     /// <summary>
-    /// Config section name for the PokeApi.
+    /// Config section for external services.
     /// </summary>
-    public const string ConfigSection_PokeApi = "PokeApi";
+    public const string ConfigSection_ExternalServices = "ExternalServices";
 
     /// <summary>
     /// Config section name for Fun Translations.
     /// </summary>
     public const string ConfigSection_FunTranslations = "FunTranslations";
+
+    /// <summary>
+    /// Config section name for the PokeApi.
+    /// </summary>
+    public const string ConfigSection_PokeApi = "PokeApi";
 
     #endregion Config sections
 }
