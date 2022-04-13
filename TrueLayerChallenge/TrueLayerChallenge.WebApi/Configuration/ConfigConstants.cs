@@ -18,9 +18,9 @@ internal class ConfigConstants
     public const string ConfigSection_PokeApi = "PokeApi";
 
     /// <summary>
-    /// Config section name for the Shakespearean translator.
+    /// Config section name for Fun Translations.
     /// </summary>
-    public const string ConfigSection_ShakespeareanTranslator = "ShakespeareanTranslator";
+    public const string ConfigSection_FunTranslations = "FunTranslations";
 
     #endregion Config sections
 }
