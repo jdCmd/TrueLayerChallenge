@@ -120,4 +120,7 @@
   <data name="Pokemon_Get_NameNotProvided" xml:space="preserve">
     <value>Pokemon name must be provided.</value>
   </data>
+  <data name="Pokemon_Get_NotFound" xml:space="preserve">
+    <value>Could not determine description for pokemon with given pokemon name.</value>
+  </data>
 </root>

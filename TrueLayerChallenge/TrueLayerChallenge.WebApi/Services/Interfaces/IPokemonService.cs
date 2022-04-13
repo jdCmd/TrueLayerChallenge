@@ -1,14 +1,16 @@
+using TrueLayerChallenge.WebApi.Dtos;
+
 namespace TrueLayerChallenge.WebApi.Services.Interfaces;
 
 /// <summary>
 /// Service providing pokemon related functionality.
 /// </summary>
-internal interface IPokemonService
+public interface IPokemonService
 {
     /// <summary>
-    /// Asynchronously gets the shakespearean description for the pokemon with the given <paramref name="name"/>.
+    /// Asynchronously gets the shakespearean description for the pokemon with the given <paramref name="pokemonName"/>.
     /// </summary>
-    /// <param name="name">Name of the pokemon for which to get the shakespearean description for.</param>
-    /// <returns><see cref="Task{T}"/> with result containing the shakespearean description of the given pokemon.</returns>
-    Task<string> GetShakespeareanDescriptionAsync(string name);
+    /// <param name="pokemonName">Name of the pokemon for which to get the shakespearean description for.</param>
+    /// <returns><see cref="ShakespeareanPokemonDescriptionDto"/> with result containing the shakespearean description of the given pokemon. If pokemon is not found, returns null.</returns>
+    Task<ShakespeareanPokemonDescriptionDto?> GetShakespeareanDescriptionAsync(string pokemonName);
 }

@@ -68,5 +68,14 @@ namespace TrueLayerChallenge.WebApi.Resources {
                 return ResourceManager.GetString("Pokemon_Get_NameNotProvided", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not determine description for pokemon with given pokemon name..
+        /// </summary>
+        internal static string Pokemon_Get_NotFound {
+            get {
+                return ResourceManager.GetString("Pokemon_Get_NotFound", resourceCulture);
+            }
+        }
     }
 }

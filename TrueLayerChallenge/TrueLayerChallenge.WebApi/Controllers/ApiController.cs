@@ -24,20 +24,20 @@ public abstract class ApiController<TController> : ControllerBase where TControl
     }
 
     /// <summary>
-    /// Performs the given <paramref name="func"/> whilst providing common logging and exception handling functionality.
+    /// Asynchronously performs the given <paramref name="func"/> whilst providing common logging and exception handling functionality.
     /// </summary>
     /// <typeparam name="T">Return type of <paramref name="func"/>.</typeparam>
     /// <param name="executingControllerActionName">The name of the controller action calling the method. This should be provided using the nameof method.</param>
     /// <param name="func">The main logic of the controller action to perform.</param>
     /// <returns><see cref="ActionResult{T}"/>.</returns>
-    protected ActionResult<T> PerformFunc<T>(string executingControllerActionName, Func<ActionResult<T>> func)
+    protected async Task<ActionResult<T>> PerformFuncAsync<T>(string executingControllerActionName, Func<Task<ActionResult<T>>> func)
     {
         try
         {
             _logger.Log(LogLevel.Information, LogMessages.Api_Called, executingControllerActionName);
             var result = func();
             _logger.Log(LogLevel.Information, LogMessages.Api_Succeeded, executingControllerActionName);
-            return result;
+            return await result;
         }
         // todo add further exception handling as required
         catch (ArgumentException e)

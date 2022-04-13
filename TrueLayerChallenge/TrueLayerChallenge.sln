@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerChallenge.WebApi",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{240ECE5C-5B5F-4116-BE27-A6C662361C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerChallenge.WebApi.IntegrationTests", "TrueLayerChallenge.WebApi.IntegrationTests\TrueLayerChallenge.WebApi.IntegrationTests.csproj", "{983F775A-05EE-4438-A252-837E6EE3EFFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerChallenge.WebApi.UnitTests", "TrueLayerChallenge.WebApi.IntegrationTests\TrueLayerChallenge.WebApi.UnitTests.csproj", "{983F775A-05EE-4438-A252-837E6EE3EFFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerChallenge.WebApi.Tests", "TrueLayerChallenge.WebApi.Tests\TrueLayerChallenge.WebApi.Tests.csproj", "{A6EA338B-0B1E-473A-BE50-E8F67D978F01}"
 EndProject
