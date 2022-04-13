@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<IPokemonService, PokemonService>();
+builder.Services.AddSingleton<IShakespeareanConverterService, ShakespeareanConverterService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,4 +29,7 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+namespace TrueLayerChallenge.WebApi
+{
+    public partial class Program { }
+}

@@ -36,6 +36,16 @@ namespace TrueLayerChallenge.WebApi.UnitTests.Controllers
             Assert.Equal("Value cannot be null. (Parameter 'logger')", e.Message);
         }
 
+        [Fact]
+        public void Ctor_NullPokemonService_ThrowsArgumentNullException()
+        {
+            // Act & Assert
+            var e = Assert.Throws<ArgumentNullException>(() => new PokemonController(_loggerMock.Object, null));
+            Assert.NotNull(e);
+            Assert.Equal("pokemonService", e.ParamName);
+            Assert.Equal("Value cannot be null. (Parameter 'pokemonService')", e.Message);
+        }
+
         #endregion Ctor
 
         #region Get

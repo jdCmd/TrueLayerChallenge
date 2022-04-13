@@ -18,9 +18,10 @@ namespace TrueLayerChallenge.WebApi.Controllers
         /// <param name="logger"><see cref="ILogger{PokemonController}"/> providing logging functionality.</param>
         /// <param name="pokemonService"><see cref="IPokemonService"/> used for performing pokemon related operations.</param>
         /// <inheritdoc cref="ApiController{TController}"/>.
+        /// <exception cref="ArgumentNullException"><paramref name="pokemonService"/> is null.</exception>
         public PokemonController(ILogger<PokemonController> logger, IPokemonService pokemonService) : base(logger)
         {
-            _pokemonService = pokemonService;
+            _pokemonService = pokemonService ?? throw new ArgumentNullException(nameof(pokemonService));
         }
 
         /// <summary>
