@@ -23,8 +23,26 @@ namespace TrueLayerChallenge.WebApi.Controllers
             _pokemonService = pokemonService;
         }
 
+        /// <summary>
+        /// Gets the Shakespearean description for the pokemon with the given <paramref name="pokemonName"/>.
+        /// </summary>
+        /// <param name="pokemonName">Name of the pokemon for which to obtain the Shakespearean description for.</param>
+        /// <returns>
+        /// <see cref="OkObjectResult"/> on successfully determining the Shakespearean description for the given pokemon.
+        /// -or-
+        /// <see cref="BadRequestResult"/> if the given <paramref name="pokemonName"/> is null, empty or whitespace.
+        /// -or-
+        /// <see cref="NotFoundObjectResult"/> if failed to determine Shakespearean description for the given pokemon.
+        /// Reasons include the given <paramref name="pokemonName"/> does not correspond to a real pokemon.
+        /// -or-
+        /// <see cref="StatusCodeResult"/> corresponding to an internal server error.
+        /// </returns>
         [HttpGet]
         [Route("{pokemonName}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ShakespeareanPokemonDescriptionDto>> GetShakespeareanDescription(string pokemonName)
         {
             return await PerformFuncAsync<ShakespeareanPokemonDescriptionDto>(nameof(GetShakespeareanDescription), async () =>
