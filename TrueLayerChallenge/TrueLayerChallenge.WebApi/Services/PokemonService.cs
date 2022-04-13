@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Configuration;
 using TrueLayerChallenge.WebApi.Dtos;
+using TrueLayerChallenge.WebApi.Schemas.PokeApi;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
 namespace TrueLayerChallenge.WebApi.Services;
@@ -12,7 +14,7 @@ internal class PokemonService : IPokemonService
     private readonly IFunTranslationsService _funTranslationsService;
     private readonly HttpClient _client;
 
-    private const string PokemonEndpoint = "pokemon/";
+    private const string Endpoint_PokemonSpecies = "pokemon-species/";
 
     /// <summary>
     /// Creates a new <see cref="PokemonService"/>.
@@ -56,16 +58,18 @@ internal class PokemonService : IPokemonService
 
     private async Task<string?> GetPokemonDescriptionAsync(string pokemonName)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, $"{PokemonEndpoint}{pokemonName}");
-
-        var response = await _client.SendAsync(request);
+        using var request = new HttpRequestMessage(HttpMethod.Get, $"{Endpoint_PokemonSpecies}{pokemonName}");
+        using var response = await _client.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
         {
 
         }
 
-        return await response.Content.ReadAsStringAsync();
+        var speciesInfo = JsonConvert.DeserializeObject<PokemonSpecies>(await response.Content.ReadAsStringAsync());
+        
+        // todo future improvement update so can use description for different versions for test just use first
+        return speciesInfo.flavor_text_entries[0].flavor_text;
     }
 
     private async Task<string> ConvertToShakespeareanAsync(string content)

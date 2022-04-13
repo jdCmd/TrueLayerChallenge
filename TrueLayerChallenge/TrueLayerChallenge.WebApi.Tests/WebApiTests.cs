@@ -78,6 +78,5 @@ namespace TrueLayerChallenge.WebApi.Tests
         }
 
         #endregion Pokemon
-
     }
 }
