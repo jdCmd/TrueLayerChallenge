@@ -1,8 +1,7 @@
 using System.Web;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Configuration;
-using TrueLayerChallenge.WebApi.Enums;
+using TrueLayerChallenge.WebApi.Extensions;
 using TrueLayerChallenge.WebApi.Schemas.FunTranslations;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
@@ -29,7 +28,7 @@ internal class FunTranslationsService : IFunTranslationsService
         };
     }
 
-    public async Task<string> ConvertToShakespeareanAsync(string content)
+    public async Task<string?> ConvertToShakespeareanAsync(string content)
     {
         var encodedContent = HttpUtility.UrlEncode(content);
         using var request = new HttpRequestMessage(HttpMethod.Post, $"{ShakespeareEndpoint}?text={encodedContent}");
@@ -37,23 +36,17 @@ internal class FunTranslationsService : IFunTranslationsService
 
         if (!response.IsSuccessStatusCode)
         {
-            // todo handle response error etc
+            // could do something more elaborate here but just for illustration will log failure and return null
+            return null;
         }
 
-        var translation = DeserialiseToTranslation(await response.Content.ReadAsStringAsync(), FunTranslation.Shakespeare);
+        var translation = await response.DeseriliseJsonContentAsync<Translation>();
         return translation.contents.translated;
     }
 
-    // could add other translation options such as pig latin etc...
-
+    /// <inheritdoc />
     public void Dispose()
     {
         _client?.Dispose();
-    }
-
-    private static Translation DeserialiseToTranslation(string content, FunTranslation funTranslation)
-    {
-        return JsonConvert.DeserializeObject<Translation>(content) ?? throw new JsonSerializationException(
-            $"Failed to deserialise response from Fun Translations. Translation: {funTranslation}");
     }
 }

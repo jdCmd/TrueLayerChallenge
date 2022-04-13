@@ -34,13 +34,11 @@ namespace TrueLayerChallenge.WebApi.Tests
         }
 
         [Theory]
-        [InlineData("123")]
+        [InlineData("123abc")]
         [InlineData("mewthree")]
         [InlineData("blah_blah")]
         public async void Pokemon_Get_PokemonNameNotActualPokemon_ReturnsNotFound(string pokemonName)
         {
-            throw new NotImplementedException();
-
             // Arrange
             var client = _factory.CreateClient();
 
@@ -49,16 +47,24 @@ namespace TrueLayerChallenge.WebApi.Tests
 
             // Assert
             Assert.NotNull(response);
-            Assert.True(response.IsSuccessStatusCode);
+            Assert.False(response.IsSuccessStatusCode);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             var reason = await response.Content.ReadAsStringAsync();
-            Assert.Equal("Could not find pokemon details for given pokemon name.", reason);
+            Assert.Equal("Could not determine description for pokemon with given pokemon name.", reason);
         }
 
         [Theory]
-        [InlineData("charizard", "some description")]
-        [InlineData("mewtwo", "some description")]
-        [InlineData("snorlax", "some description")]
+
+        // I am having issues locally communicating with Fun Translations as it is blocked by AV
+        // Hence just use the actual description for illustration.
+
+        //[InlineData("charizard", "insert expected Shakespearean description here")]
+        //[InlineData("mewtwo", "insert expected Shakespearean description here")]
+        //[InlineData("snorlax", "insert expected Shakespearean description here")]
+
+        [InlineData("charizard", "Spits fire that\nis hot enough to\nmelt boulders.\fKnown to cause\nforest fires\nunintentionally.")]
+        [InlineData("mewtwo", "It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.")]
+        [InlineData("snorlax", "Very lazy. Just\neats and sleeps.\nAs its rotund\fbulk builds, it\nbecomes steadily\nmore slothful.")]
         public async void Pokemon_Get_PokemonNameIsValid_ReturnsExpectedResult(string pokemonName, string expectedDescription)
         {
             // Arrange

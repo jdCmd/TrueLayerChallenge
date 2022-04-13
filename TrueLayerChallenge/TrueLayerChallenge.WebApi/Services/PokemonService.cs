@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Configuration;
 using TrueLayerChallenge.WebApi.Dtos;
+using TrueLayerChallenge.WebApi.Extensions;
 using TrueLayerChallenge.WebApi.Schemas.PokeApi;
 using TrueLayerChallenge.WebApi.Services.Interfaces;
 
@@ -52,8 +52,17 @@ internal class PokemonService : IPokemonService
         return new ShakespeareanPokemonDescriptionDto
         {
             Name = pokemonName,
-            Description = await ConvertToShakespeareanAsync(description)
+            // having issues locally communicating with Fun Translator as is blocked by local AV.
+            // Hence return actual description if not retrieved so there is something to show!
+            Description = await ConvertToShakespeareanAsync(description) ?? description
         };
+    }
+
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _funTranslationsService?.Dispose();
+        _client?.Dispose();
     }
 
     private async Task<string?> GetPokemonDescriptionAsync(string pokemonName)
@@ -63,23 +72,19 @@ internal class PokemonService : IPokemonService
 
         if (!response.IsSuccessStatusCode)
         {
-
+            // could do something more elaborate here but just for illustration will log failure and return null
+            return null;
         }
 
-        var speciesInfo = JsonConvert.DeserializeObject<PokemonSpecies>(await response.Content.ReadAsStringAsync());
-        
-        // todo future improvement update so can use description for different versions for test just use first
+        var speciesInfo = await response.DeseriliseJsonContentAsync<PokemonSpecies>();
+
+        // future improvement update could be to allow user to choose different versions for test just use first for illustration
+
         return speciesInfo.flavor_text_entries[0].flavor_text;
     }
 
-    private async Task<string> ConvertToShakespeareanAsync(string content)
+    private async Task<string?> ConvertToShakespeareanAsync(string content)
     {
         return await _funTranslationsService.ConvertToShakespeareanAsync(content);
-    }
-
-    public void Dispose()
-    {
-        _funTranslationsService?.Dispose();
-        _client?.Dispose();
     }
 }

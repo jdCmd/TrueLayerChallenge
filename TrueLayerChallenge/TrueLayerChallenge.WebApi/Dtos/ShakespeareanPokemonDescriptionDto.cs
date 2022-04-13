@@ -13,6 +13,6 @@
         /// <summary>
         /// The Shakespearean description of the pokemon.
         /// </summary>
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; } = null!;
     }
 }
