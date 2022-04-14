@@ -1,4 +1,6 @@
-﻿namespace TrueLayerChallenge.WebApi.Schemas.PokeApi;
+﻿#pragma warning disable CS8618
+
+namespace TrueLayerChallenge.WebApi.Schemas.PokeApi;
 
 public class Variety
 {

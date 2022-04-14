@@ -1,4 +1,6 @@
-﻿namespace TrueLayerChallenge.WebApi.Schemas.FunTranslations;
+﻿#pragma warning disable CS8618
+
+namespace TrueLayerChallenge.WebApi.Schemas.FunTranslations;
 
 public class Success
 {
