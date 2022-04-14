@@ -115,6 +115,15 @@ namespace TrueLayerChallenge.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to JSON deserialisation of Fun Transaltions response failed for string &apos;{0}&apos;. Exception message: &apos;{1}&apos;..
+        /// </summary>
+        internal static string FunTranslation_JsonDeserialisationFailed {
+            get {
+                return ResourceManager.GetString("FunTranslation_JsonDeserialisationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PokeApi request returned non-success status code: {0}..
         /// </summary>
         internal static string PokeApi_ErrorResponse {
@@ -129,6 +138,15 @@ namespace TrueLayerChallenge.WebApi.Resources {
         internal static string PokeApi_HttpRequestFailed {
             get {
                 return ResourceManager.GetString("PokeApi_HttpRequestFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON deserialisation of PokeApi response failed for pokemon &apos;{0}&apos;. Exception message: &apos;{1}&apos;..
+        /// </summary>
+        internal static string PokeApi_JsonDeserialisationFailed {
+            get {
+                return ResourceManager.GetString("PokeApi_JsonDeserialisationFailed", resourceCulture);
             }
         }
     }

@@ -135,10 +135,16 @@
   <data name="FunTranslation_HttpRequestFailed" xml:space="preserve">
     <value>Fun Translator request failed due to HTTP related error.</value>
   </data>
+  <data name="FunTranslation_JsonDeserialisationFailed" xml:space="preserve">
+    <value>JSON deserialisation of Fun Transaltions response failed for string '{0}'. Exception message: '{1}'.</value>
+  </data>
   <data name="PokeApi_ErrorResponse" xml:space="preserve">
     <value>PokeApi request returned non-success status code: {0}.</value>
   </data>
   <data name="PokeApi_HttpRequestFailed" xml:space="preserve">
     <value>PokeApi request failed due to HTTP related error.</value>
+  </data>
+  <data name="PokeApi_JsonDeserialisationFailed" xml:space="preserve">
+    <value>JSON deserialisation of PokeApi response failed for pokemon '{0}'. Exception message: '{1}'.</value>
   </data>
 </root>

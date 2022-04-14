@@ -1,4 +1,5 @@
 using System.Web;
+using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Extensions;
 using TrueLayerChallenge.WebApi.Resources;
 using TrueLayerChallenge.WebApi.Schemas.FunTranslations;
@@ -10,6 +11,7 @@ internal class FunTranslationsService : IFunTranslationsService
 {
     private readonly ILogger<FunTranslationsService> _logger;
     private readonly HttpClient _client;
+    private bool _disposed;
 
     private const string ShakespeareEndpoint = "shakespeare.json";
 
@@ -21,6 +23,8 @@ internal class FunTranslationsService : IFunTranslationsService
 
     public async Task<string?> ConvertToShakespeareanAsync(string content)
     {
+        if (_disposed) throw new ObjectDisposedException(ToString());
+
         try
         {
             var encodedContent = HttpUtility.UrlEncode(content);
@@ -43,11 +47,18 @@ internal class FunTranslationsService : IFunTranslationsService
             _logger.Log(LogLevel.Error, LogMessages.FunTranslation_HttpRequestFailed);
             return null;
         }
+        catch (JsonSerializationException e)
+        {
+            _logger.Log(LogLevel.Error, LogMessages.PokeApi_JsonDeserialisationFailed, content, e.Message);
+            return null;
+        }
     }
 
     /// <inheritdoc />
     public void Dispose()
     {
-        _client?.Dispose();
+        if(!_disposed) _client?.Dispose();
+
+        _disposed = true;
     }
 }

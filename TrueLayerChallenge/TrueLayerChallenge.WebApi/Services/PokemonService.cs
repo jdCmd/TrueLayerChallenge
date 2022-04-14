@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Dtos;
 using TrueLayerChallenge.WebApi.Extensions;
 using TrueLayerChallenge.WebApi.Resources;
@@ -12,6 +13,7 @@ internal class PokemonService : IPokemonService
     private readonly ILogger<PokemonService> _logger;
     private readonly IFunTranslationsService _funTranslationsService;
     private readonly HttpClient _client;
+    private bool _disposed;
 
     private const string Endpoint_PokemonSpecies = "pokemon-species/";
 
@@ -38,6 +40,8 @@ internal class PokemonService : IPokemonService
     /// <inheritdoc />
     public async Task<ShakespeareanPokemonDescriptionDto?> GetShakespeareanDescriptionAsync(string pokemonName)
     {
+        if (_disposed) throw new ObjectDisposedException(ToString());
+
         var description = await GetPokemonDescriptionAsync(pokemonName);
 
         if (description == null) return null;
@@ -54,8 +58,13 @@ internal class PokemonService : IPokemonService
     /// <inheritdoc />
     public void Dispose()
     {
-        _funTranslationsService?.Dispose();
-        _client?.Dispose();
+        if (!_disposed)
+        {
+            _funTranslationsService?.Dispose();
+            _client?.Dispose();
+        }
+
+        _disposed = true;
     }
 
     private async Task<string?> GetPokemonDescriptionAsync(string pokemonName)
@@ -85,8 +94,11 @@ internal class PokemonService : IPokemonService
             _logger.Log(LogLevel.Error, LogMessages.PokeApi_HttpRequestFailed);
             return null;
         }
-
-
+        catch (JsonSerializationException e)
+        {
+            _logger.Log(LogLevel.Error, LogMessages.PokeApi_JsonDeserialisationFailed, pokemonName, e.Message);
+            return null;
+        }
     }
 
     private async Task<string?> ConvertToShakespeareanAsync(string content)
