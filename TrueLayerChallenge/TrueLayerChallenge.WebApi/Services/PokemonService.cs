@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using TrueLayerChallenge.WebApi.Dtos;
 using TrueLayerChallenge.WebApi.Extensions;
@@ -85,8 +86,7 @@ internal class PokemonService : IPokemonService
             var speciesInfo = await response.DeseriliseJsonContentAsync<PokemonSpecies>();
 
             // future improvement update could be to allow user to choose different versions for test just use first for illustration
-
-            return speciesInfo.flavor_text_entries[0].flavor_text;
+            return Regex.Replace(speciesInfo.flavor_text_entries[0].flavor_text, @"\r\n?|\n|\f", " ");
         }
         catch (HttpRequestException)
         {

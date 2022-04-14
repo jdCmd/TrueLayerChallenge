@@ -61,9 +61,9 @@ namespace TrueLayerChallenge.WebApi.Tests
         //[InlineData("mewtwo", "insert expected Shakespearean description here")]
         //[InlineData("snorlax", "insert expected Shakespearean description here")]
 
-        [InlineData("charizard", "Spits fire that\nis hot enough to\nmelt boulders.\fKnown to cause\nforest fires\nunintentionally.")]
-        [InlineData("mewtwo", "It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.")]
-        [InlineData("snorlax", "Very lazy. Just\neats and sleeps.\nAs its rotund\fbulk builds, it\nbecomes steadily\nmore slothful.")]
+        [InlineData("charizard", "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally.")]
+        [InlineData("mewtwo", "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.")]
+        [InlineData("snorlax", "Very lazy. Just eats and sleeps. As its rotund bulk builds, it becomes steadily more slothful.")]
         public async void Pokemon_Get_PokemonNameIsValid_ReturnsExpectedResult(string pokemonName, string expectedDescription)
         {
             // Arrange

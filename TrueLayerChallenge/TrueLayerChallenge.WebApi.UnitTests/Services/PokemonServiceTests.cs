@@ -185,7 +185,7 @@ public class PokemonServiceTests : IDisposable
     {
         // Arrange
         var pokemonName = "ditto";
-        var translatedDescription = "Capable of copying\nan enemy's genetic\ncode to instantly\ftransform itself\ninto a duplicate\nof the enemy.";
+        var translatedDescription = "Capable of copying an enemy's genetic code to instantly transform itself into a duplicate of the enemy.";
 
         using var pokemonResponse = new HttpResponseMessage
         {
