@@ -69,4 +69,5 @@ If I had more time I would consider implementing the following:
 - One could extend the FunTranslationsService to handle other translations. Rather than adding many duplicated methods for this I would use an enum to represent the FunTranslationType and use a switch statement to determine the URL in the outgoing request. 
 - The FunTranslationsService stuff could then be moved out to a new assembly to make it reusable.
 - Utilise build props to reduce the amount of duplicated content in csproj files.
+- I am having loads of issues trying to use the Dockerfile - perhaps it is my machine! I have left it in there for your review - it was produced using Visual Studio. If I had more time I would have resolved it so that I had an image etc available with the app.
 
