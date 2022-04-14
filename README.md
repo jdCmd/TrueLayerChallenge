@@ -44,7 +44,7 @@ One can also use the [`dotnet` run command](https://docs.microsoft.com/en-us/dot
 dotnet run webApiProjectPath
 ```
 
-The app will now be running on the configured ports in the appsettings.json (e.g. 5000 and 5001). The log is output to the command line.
+The app will now be running on the configured ports in the appsettings.json (e.g. 5000 and 5001). The log is output to the command line. 
 
 ## Test
 
@@ -59,5 +59,14 @@ Where `solutionPath` is the path to the solution (.sln) file or project (.csproj
 
 ## Future Improvements
 
-TODO
+If I had more time I would consider implementing the following:
+- Adding extra logging
+- Implement caching of responses using IMemoryCache.
+- Looking into where the hot code paths are and checking for performance issues. Regarding performance it does take a few seconds to respond but I think this is due to the responsiveness of the two external services rather than my implementation but I could be wrong!
+- Adding performance tests and integration level tests from the service layer to the respective external services. Each would be in individual projects.
+- Adding a full CI pipeline 
+- Completing XML docs and checking for inconsitencies in implementation and the docs I have provided.
+- One could extend the FunTranslationsService to handle other translations. Rather than adding many duplicated methods for this I would use an enum to represent the FunTranslationType and use a switch statement to determine the URL in the outgoing request. 
+- The FunTranslationsService stuff could then be moved out to a new assembly to make it reusable.
+- Utilise build props to reduce the amount of duplicated content in csproj files.
 
