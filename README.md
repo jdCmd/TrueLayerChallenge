@@ -60,9 +60,11 @@ Where `solutionPath` is the path to the solution (.sln) file or project (.csproj
 ## Future Improvements
 
 If I had more time I would consider implementing the following:
+- The tests I have added in TrueLayerChallenge\TrueLayerChallenge.WebApi.Tests\WebApiTests.cs may fail locally as my local AV blocks Fun Translations and so I have just returned the pokemon description to the user if it could not be translated.
 - Adding extra logging
 - Implement caching of responses using IMemoryCache.
 - Looking into where the hot code paths are and checking for performance issues. Regarding performance it does take a few seconds to respond but I think this is due to the responsiveness of the two external services rather than my implementation but I could be wrong!
+- I would unit test all unit testable code that is worth unit testing (not the schemas for example as get; set; are trivial). The tests I have added cover a good proportion of the code for your review.
 - Adding performance tests and integration level tests from the service layer to the respective external services. Each would be in individual projects.
 - Adding a full CI pipeline 
 - Completing XML docs and checking for inconsitencies in implementation and the docs I have provided.
