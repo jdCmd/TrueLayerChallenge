@@ -25,4 +25,19 @@
     <ProjectReference Include="..\TrueLayerChallenge.WebApi\TrueLayerChallenge.WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\TestResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\TestResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

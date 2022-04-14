@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
@@ -79,8 +78,10 @@ namespace TrueLayerChallenge.WebApi.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var dto = JsonConvert.DeserializeObject<ShakespeareanPokemonDescriptionDto>(await response.Content.ReadAsStringAsync());
             Assert.NotNull(dto);
+#pragma warning disable CS8602 // Cannot convert null literal to non-nullable reference type.
             Assert.Equal(pokemonName, dto.Name);
             Assert.Equal(expectedDescription, dto.Description);
+#pragma warning restore CS8602 // Cannot convert null literal to non-nullable reference type.
         }
 
         #endregion Pokemon
